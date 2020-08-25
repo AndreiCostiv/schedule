@@ -1,6 +1,7 @@
 import React from 'react'
 
 import firebase from '../../Firebase';
+import './Home.sass';
 
 const Home = () => {
     return (
@@ -12,4 +13,4 @@ const Home = () => {
     );
 };
 
-export default Home
+export default Home;
