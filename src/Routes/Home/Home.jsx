@@ -1,18 +1,15 @@
 import React from 'react'
-import firebase from '../../Firebase';
+
 // Route layout:
-import './Home.sass';
+import '../RouteLayout.sass';
+
 // Components:
-import Header from '../../Components/UIComponents/Header';
+import MainHeader from '../../Components/MainHeader/MainHeader';
 
 const Home = () => {
     return (
-        <section>
-            <Header size = {1}>Schedule</Header>
-
-            <button onClick = { () => firebase.auth().signOut()}>
-                Log Out
-            </button>
+        <section className = 'RouteLayout'>
+            <MainHeader/>
         </section>
     );
 };

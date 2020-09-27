@@ -20,18 +20,38 @@ const LogIn = () => {
     const [pass, setPass] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passError, setPassError] = useState('');
+    const [signInError, setSignInError] = useState('');
+
+    const IfEmailTyped = (arg) => {
+        if(arg === undefined || arg.length === 0){
+            setEmailError('Email is required');
+            return false;
+        }
+        
+        return true;
+    };
+
+    const IfPassTyped = (arg) => {
+        if(arg === undefined || arg.length === 0){
+            setPassError('Password is required');
+            return false;
+        }
+        
+        return true;
+    };
 
     const EmailValidator = (arg) => {
         if(!validator.isEmail(arg)){
-            return('Enter valid email adress');
+            setEmailError('Enter valid email adress');
+            return false;
         }
-        else
-            return(true);
+        
+        return true;
     };
 
     const PassValidator = (arg) => {
         if(arg.length < 8 || arg.length > 20){
-            return('Password should contain 8-20 symbols');
+            setPassError('Password should contain 8-20 symbols');
         }
         else
             return(true);
@@ -42,40 +62,28 @@ const LogIn = () => {
             e.preventDefault();
             const {emailInput, passInput} = e.target.elements;
             
-            EmailValidator(emailInput.value);
-            PassValidator(passInput.value);
+            if(
+                IfEmailTyped(emailInput.value) === false 
+                || IfPassTyped(passInput.value) === false
+                || EmailValidator(emailInput.value) === false
+                || PassValidator(passInput.value) === false
+            ) 
+                return false;
 
-            if( emailInput.value.length === 0 ) {
-                setEmailError('Email is required');
-                return ( false );
-            }  
-             if( passInput.value.length === 0 ){
-                setPassError('Password is required');
-                return( false );
-            }
-            else if(emailError.length !== 0 || passError.length !== 0){
-                return( false );
-            } 
-            
             try{
                 await firebase
                     .auth()
                     .signInWithEmailAndPassword(emailInput.value, passInput.value);
             }
             catch (error){
-                alert(error);
+                setSignInError(error.message);
             };
         }, []
     ); 
 
     useEffect(() => {
-        setEmailError(
-            EmailValidator(email)
-        );
-        
-        setPassError(
-            PassValidator(pass)
-        );
+        EmailValidator(email);
+        PassValidator(pass);
 
         if(email.length === 0 || pass.length === 0){
             setEmailError('');
@@ -123,6 +131,9 @@ const LogIn = () => {
                 {passError}
             </AuthErrors>
 
+            <AuthErrors>
+                {signInError}
+            </AuthErrors>
 
             <Button type = 'submit' className = 'AuthBtn'>
                 Log In
