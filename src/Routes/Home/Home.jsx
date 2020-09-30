@@ -5,11 +5,14 @@ import '../RouteLayout.sass';
 
 // Components:
 import MainHeader from '../../Components/MainHeader/MainHeader';
+import TaskViewer from '../../Components/TasksViewer/TaskViewer';
 
 const Home = () => {
     return (
         <section className = 'RouteLayout'>
-            <MainHeader/>
+            <MainHeader />
+
+            <TaskViewer />
         </section>
     );
 };

@@ -1,4 +1,5 @@
 import React, {useState, useEffect, createContext} from 'react';
+//database:
 import firebase from '../Firebase'
 
 export const AuthContext = createContext();
@@ -11,7 +12,8 @@ export const AuthProvider = ({ children }) => {
 		firebase.auth().onAuthStateChanged((user) => {
             setCurrentUser(user)
             setPending(false)
-		});
+        });
+        
     }, []);
 
     if(pending){
@@ -21,7 +23,7 @@ export const AuthProvider = ({ children }) => {
     return(
         <AuthContext.Provider
             value = {{
-                currentUser
+                currentUser,
             }}
         >
         {children}
