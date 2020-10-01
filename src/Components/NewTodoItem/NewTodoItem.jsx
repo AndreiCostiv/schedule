@@ -20,9 +20,8 @@ const NewTodoItem = () => {
     const [data, setData] = useState('');
     const {currentUser} = useContext(AuthContext);
 
-    const OnChange = (e) => {
+    const OnChange = (e) => 
         setData(e.target.value);
-    };
 
     const  SaveTask = async (e) => {
         e.preventDefault();
@@ -34,7 +33,8 @@ const NewTodoItem = () => {
             await db.ref(`tasks/${currentUser.uid}`).push({
                 value: data,
                 finished: false,
-                listOrder: false
+                listOrder: false,
+
             });
             setData('');
         }
@@ -50,6 +50,8 @@ const NewTodoItem = () => {
                 value = {data} name = 'task'
                 onChange = {e => OnChange(e)} 
                 onKeyUp = {e => SaveTask(e)}
+                autoComplete = 'false'
+                type = 'text'
             />
 
             <Button 

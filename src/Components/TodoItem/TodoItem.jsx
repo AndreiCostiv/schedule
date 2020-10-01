@@ -5,16 +5,21 @@ import './TodoItem.sass';
 
 //icons:
 import ToDo from '../../Icons/ToDo.svg';
+import RemoveIcon from '../../Icons/RemoveIcon.svg';
 
-const TodoItem = ({tasks}) => {
-    // finished, listOrder
-    let {value} = tasks;
+
+const TodoItem = ({item, RemoveItem}) => {
+    let {value} = item;
     const [task, setTask] = useState(value);
-    
-    //On focus out save task
+        
+    //On focus out save task:
     return (
-        <label className = 'TodoItemLabel'>
-            <img src={ToDo} alt = 'CheckIcon' className = 'ToDoCheckedIcon'/>
+        <section className = 'TodoItemLabel'>
+            <img 
+                src = {ToDo} 
+                className = 'ToDoCheckedIcon' 
+                alt = ''
+            />
 
             <input 
                 className = 'TodoItem' 
@@ -22,7 +27,14 @@ const TodoItem = ({tasks}) => {
                 type = 'text' 
                 onChange = { e => setTask(e.target.value)}
             />
-        </label>
+
+            <img 
+                src = {RemoveIcon} 
+                onClick = {() => RemoveItem(item.id)}
+                className = 'RemoveIcon' 
+                alt = ''
+            />
+        </section>
     );
 };
 
