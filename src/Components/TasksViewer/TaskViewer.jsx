@@ -11,7 +11,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import useFirebase from '../../Hooks/useFirebase';
 
 const TaskViewer = () => {
-    const {tasks, RemoveItem} = useFirebase();
+    const {tasks, RemoveItem, UpdateItem} = useFirebase();
 
     return (
         <section className = 'TaskViewer'>
@@ -21,6 +21,7 @@ const TaskViewer = () => {
                         item = {item} 
                         key ={i}
                         RemoveItem = {RemoveItem}
+                        UpdateItem = {UpdateItem}
                     />
                 )}
             </section>

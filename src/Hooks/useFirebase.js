@@ -26,7 +26,7 @@ const useFirebase = () => {
                         listOrder: items[item].listOrder,
                         value: items[item].value
                     })
-                }
+                };
                 
                 setTasks(() => newState);
             })
@@ -38,24 +38,27 @@ const useFirebase = () => {
 
         // unsubscribe from database:
         return () => db.ref(`tasks/${currentUser.uid}`).off();
-
         // eslint-disable-next-line
     }, []);
+
+    //updata task:
+    const UpdateItem = (itemId, newData) => {
+        const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
+        itemRef.update({value: newData});
+    };
 
     // remove todo from list:
     const RemoveItem = itemId => {
         const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
-        try{
-            itemRef.remove();
-        }
-        catch (error){
-            console.log(error);
-        };
+        itemRef.remove();
+        // const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
+        // itemRef.update({value: null});
     };
 
     return ( {
         tasks,
         readError,
+        UpdateItem,
         RemoveItem
     });
 };

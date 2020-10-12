@@ -7,11 +7,10 @@ import './TodoItem.sass';
 import ToDo from '../../Icons/ToDo.svg';
 import RemoveIcon from '../../Icons/RemoveIcon.svg';
 
-
-const TodoItem = ({item, RemoveItem}) => {
+const TodoItem = ({item, RemoveItem, UpdateItem}) => {
     let {value} = item;
     const [task, setTask] = useState(value);
-        
+
     //On focus out save task:
     return (
         <section className = 'TodoItemLabel'>
@@ -26,6 +25,7 @@ const TodoItem = ({item, RemoveItem}) => {
                 value = {task} 
                 type = 'text' 
                 onChange = { e => setTask(e.target.value)}
+                onBlur = { () => UpdateItem(item.id, task)}
             />
 
             <img 
