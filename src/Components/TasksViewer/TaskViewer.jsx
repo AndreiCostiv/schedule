@@ -19,7 +19,7 @@ const TaskViewer = () => {
                 {tasks.map( (item, i) =>
                     <TodoItem 
                         item = {item} 
-                        key ={i}
+                        key = {item.id}
                         RemoveItem = {RemoveItem}
                         UpdateItem = {UpdateItem}
                     />

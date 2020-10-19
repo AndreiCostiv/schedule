@@ -7,57 +7,80 @@ import {db} from '../Firebase';
 import {AuthContext} from '../Context/AuthContext';
 
 const useFirebase = () => {
-    const [tasks, setTasks] = useState([]);
-    const [readError, setReadError] = useState([]);
-    
+    //getting details about user account:
     const {currentUser} = useContext(AuthContext);
+    
+    //add new item into todo list:
+    const  SaveTask = async (e, data, setData) => {
+        e.preventDefault();
 
-    // get todo list:
-    useEffect(() => {
-        try{
-            db.ref(`tasks/${currentUser.uid}`).on('value', snapshot => {
-                let items = snapshot.val();
-                let newState = [];
-                
-                for (let item in items) {
-                    newState.push({
-                        id: item,
-                        finished: items[item].finished,
-                        listOrder: items[item].listOrder,
-                        value: items[item].value
+        if( data.length > 0 & e.keyCode === 13 || e.currentTarget.type === 'submit'){            
+            try{
+                await db.ref(`tasks/${currentUser.uid}`).push({
+                    task: data,
+                    ifFinished: false,
+                    listOrder: false,
+                });
+                setData('');
+            }
+            catch (error) {
+                console.log(error);
+            };
+        }
+        else
+            return false;
+    };
+
+    //get todo list from database: 
+    const [tasks, setTasks] = useState([]);   
+
+    const getData = async () => {
+        try {
+            await db.ref(`tasks/${currentUser.uid}`).on('value', snapshot => {
+                let receivedData = [];
+
+                snapshot.forEach(item => {
+                    receivedData.push({
+                        id: item.key,
+                        task: item.val().task,
+                        ifFinished: item.val().ifFinished,         
                     })
-                };
-                
-                setTasks(() => newState);
-            })
-        } 
-        catch (error) {
-            setReadError(error);
-            console.log(readError);
-        };
+                });
 
-        // unsubscribe from database:
+                setTasks(() => receivedData);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getData();
         return () => db.ref(`tasks/${currentUser.uid}`).off();
         // eslint-disable-next-line
     }, []);
 
     //updata task:
-    const UpdateItem = (itemId, newData) => {
-        const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
-        itemRef.update({value: newData});
+    const UpdateItem = async (itemId, newData) => {
+        try {
+            await db.ref(`tasks/${currentUser.uid}`).child(`${itemId}`).update({task: newData});            
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // remove todo from list:
-    const RemoveItem = itemId => {
-        const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
-        itemRef.remove();
-        // const itemRef = db.ref(`tasks/${currentUser.uid}/${itemId}`);
-        // itemRef.update({value: null});
+    const RemoveItem = key => {
+        try {
+            db.ref(`tasks/${currentUser.uid}`).child(`${key}`).remove()
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    return ( {
+    return ({
         tasks,
-        readError,
+        SaveTask,
         UpdateItem,
         RemoveItem
     });
