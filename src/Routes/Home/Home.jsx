@@ -7,7 +7,6 @@ import '../RouteLayout.sass';
 import MainHeader from '../../Components/MainHeader/MainHeader';
 import TaskViewer from '../../Components/TasksViewer/TaskViewer';
 
-
 const Home = () => {
     return (
         <section className = 'RouteLayout'>

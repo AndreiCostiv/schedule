@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 
 //components:
 import Input from '../UIComponents/Input';
@@ -16,8 +16,12 @@ const NewTodoItem = () => {
 
     const {SaveTask} = useFirebase();
 
-    const OnChange = (e) => 
-        setData(e.target.value);
+    const OnChange = (e) => {
+        if (e.target.value.length > 20)
+            setData(e.target.value.slice('0', '20'));
+        else
+            setData(e.target.value);
+    };
 
     return (
         <section className = 'NewTodoItem'>

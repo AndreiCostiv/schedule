@@ -16,7 +16,7 @@ const useFirebase = () => {
 
         if( data.length > 0 & e.keyCode === 13 || e.currentTarget.type === 'submit'){            
             try{
-                await db.ref(`tasks/${currentUser.uid}`).push({
+                await db.ref(`${currentUser.uid}/tasks`).push({
                     task: data,
                     ifFinished: false,
                     listOrder: false,
@@ -36,7 +36,7 @@ const useFirebase = () => {
 
     const getData = async () => {
         try {
-            await db.ref(`tasks/${currentUser.uid}`).on('value', snapshot => {
+            await db.ref(`${currentUser.uid}/tasks`).on('value', snapshot => {
                 let receivedData = [];
 
                 snapshot.forEach(item => {
@@ -56,14 +56,14 @@ const useFirebase = () => {
 
     useEffect(() => {
         getData();
-        return () => db.ref(`tasks/${currentUser.uid}`).off();
+        return () => db.ref(`${currentUser.uid}/tasks`).off();
         // eslint-disable-next-line
     }, []);
 
     //updata task:
     const UpdateItem = async (itemId, newData) => {
         try {
-            await db.ref(`tasks/${currentUser.uid}`).child(`${itemId}`).update({task: newData});            
+            await db.ref(`${currentUser.uid}/tasks`).child(`${itemId}`).update({task: newData});            
         } catch (error) {
             console.log(error);
         }
@@ -72,7 +72,7 @@ const useFirebase = () => {
     // remove todo from list:
     const RemoveItem = key => {
         try {
-            db.ref(`tasks/${currentUser.uid}`).child(`${key}`).remove()
+            db.ref(`${currentUser.uid}/tasks`).child(`${key}`).remove()
         } catch (error) {
             console.log(error);
         }
