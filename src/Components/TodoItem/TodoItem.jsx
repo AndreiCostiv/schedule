@@ -15,11 +15,6 @@ const TodoItem = ({item, RemoveItem, UpdateItem}) => {
     let {task} = item;
     const [text, setText] = useState(task);
 
-    const [isDraggable, setIsDraggable] = useState(false);
-
-    useEffect(() => {
-    }, [isDraggable])
-
     const OnChange = e => {
         if (e.target.value.length > 20)  
             setText(e.target.value.slice('0', '20'));
@@ -36,19 +31,14 @@ const TodoItem = ({item, RemoveItem, UpdateItem}) => {
             />
 
             <section 
-                onMouseEnter = {() => setIsDraggable(true)} 
-                onMouseLeave = {() => setIsDraggable(false)}
                 className = 'dNdIconBody'
             >
-                {
-                    isDraggable 
-                    &&
-                    <img 
-                        src = {DragIcon} 
-                        className="dNdIcon"
-                        alt='' 
-                    />
-                }
+                <img
+                    src = {DragIcon} 
+                    className="dNdIcon"
+                    alt='' 
+                />
+
             </section>
 
             <Input 

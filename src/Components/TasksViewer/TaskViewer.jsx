@@ -1,4 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
+
+//libraries:
+import { ReactSortable } from 'react-sortablejs';
 
 //style:
 import './TaskViewer.sass';
@@ -11,19 +14,35 @@ import TodoItem from '../TodoItem/TodoItem';
 import useFirebase from '../../Hooks/useFirebase';
 
 const TaskViewer = () => {
-    const {tasks, RemoveItem, UpdateItem} = useFirebase();
-
+    const {tasks, setTasks, RemoveItem, UpdateItem} = useFirebase();
+    
     return (
         <section className = 'TaskViewer'>
+            
             <section className = 'TodoList'>
-                {tasks.map( (item, i) =>
+                {/* {tasks.map( (item, i) =>
                     <TodoItem 
                         item = {item} 
                         key = {item.id}
                         RemoveItem = {RemoveItem}
                         UpdateItem = {UpdateItem}
                     />
-                )}
+                )} */}
+
+                <ReactSortable
+                    handle = '.dNdIconBody'
+                    list = {tasks}
+                    setList = {newData => setTasks(newData)}
+                >
+                    {tasks.map( (item, i) =>
+                    <TodoItem
+                        item = {item} 
+                        key = {item.id}
+                        RemoveItem = {RemoveItem}
+                        UpdateItem = {UpdateItem}
+                    />
+                    )}  
+                </ReactSortable>
             </section>
 
             <NewTodoItem />

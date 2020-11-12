@@ -60,7 +60,7 @@ const useFirebase = () => {
         // eslint-disable-next-line
     }, []);
 
-    //updata task:
+    //update task:
     const UpdateItem = async (itemId, newData) => {
         try {
             await db.ref(`${currentUser.uid}/tasks`).child(`${itemId}`).update({task: newData});            
@@ -80,6 +80,7 @@ const useFirebase = () => {
 
     return ({
         tasks,
+        setTasks,
         SaveTask,
         UpdateItem,
         RemoveItem

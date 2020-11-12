@@ -1,13 +1,15 @@
 import React, {useState, useEffect, createContext} from 'react';
+
 //database:
 import firebase from '../Firebase'
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    
     const [currentUser, setCurrentUser] = useState(null);
     const [pending, setPending] = useState(null);
-
+    
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((user) => {
             setCurrentUser(user)
@@ -18,15 +20,16 @@ export const AuthProvider = ({ children }) => {
 
     if(pending){
         return <>Loading...</>
-    };
-
-    return(
-        <AuthContext.Provider
-            value = {{
-                currentUser,
-            }}
-        >
-        {children}
-        </AuthContext.Provider>
-    );
+    }
+    else if(!pending){        
+        return(
+            <AuthContext.Provider
+                value = {{
+                    currentUser
+                }}
+            >
+            {children}
+            </AuthContext.Provider>
+        );
+    }
 };
