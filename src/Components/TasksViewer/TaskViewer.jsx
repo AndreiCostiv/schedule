@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 //libraries:
 import { ReactSortable } from 'react-sortablejs';
@@ -20,15 +20,6 @@ const TaskViewer = () => {
         <section className = 'TaskViewer'>
             
             <section className = 'TodoList'>
-                {/* {tasks.map( (item, i) =>
-                    <TodoItem 
-                        item = {item} 
-                        key = {item.id}
-                        RemoveItem = {RemoveItem}
-                        UpdateItem = {UpdateItem}
-                    />
-                )} */}
-
                 <ReactSortable
                     handle = '.dNdIconBody'
                     list = {tasks}
