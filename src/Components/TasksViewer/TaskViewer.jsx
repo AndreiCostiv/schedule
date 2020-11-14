@@ -14,7 +14,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import useFirebase from '../../Hooks/useFirebase';
 
 const TaskViewer = () => {
-    const {tasks, setTasks, RemoveItem, UpdateItem} = useFirebase();
+    const {tasks, UpdateList, RemoveItem, UpdateItem} = useFirebase();
     
     return (
         <section className = 'TaskViewer'>
@@ -23,9 +23,9 @@ const TaskViewer = () => {
                 <ReactSortable
                     handle = '.dNdIconBody'
                     list = {tasks}
-                    setList = {newData => setTasks(newData)}
+                    setList = {newData => UpdateList(newData)}
                 >
-                    {tasks.map( (item, i) =>
+                    {tasks.map( (item) =>
                     <TodoItem
                         item = {item} 
                         key = {item.id}
