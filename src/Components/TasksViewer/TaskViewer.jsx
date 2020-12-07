@@ -20,20 +20,14 @@ const TaskViewer = () => {
         <section className = 'TaskViewer'>
             
             <section className = 'TodoList'>
-                <ReactSortable
-                    handle = '.dNdIconBody'
-                    list = {tasks}
-                    setList = {newData => UpdateList(newData)}
-                >
-                    {tasks.map( (item) =>
+                {tasks.map( (item) =>
                     <TodoItem
                         item = {item} 
                         key = {item.id}
                         RemoveItem = {RemoveItem}
                         UpdateItem = {UpdateItem}
                     />
-                    )}  
-                </ReactSortable>
+                )}
             </section>
 
             <NewTodoItem />
