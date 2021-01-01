@@ -62,7 +62,6 @@ const useFirebase = () => {
 
     //update list:
     const UpdateList = async (newData) => {
-        console.log(newData, 'newdata');
         try {
             await db.ref(`${currentUser.uid}/tasks`).set(newData);
             await setTasks(newData);            

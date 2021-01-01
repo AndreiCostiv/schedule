@@ -1,8 +1,5 @@
 import React from 'react';
 
-//libraries:
-import { ReactSortable } from 'react-sortablejs';
-
 //style:
 import './TaskViewer.sass';
 
@@ -14,7 +11,7 @@ import TodoItem from '../TodoItem/TodoItem';
 import useFirebase from '../../Hooks/useFirebase';
 
 const TaskViewer = () => {
-    const {tasks, UpdateList, RemoveItem, UpdateItem} = useFirebase();
+    const {tasks, RemoveItem, UpdateItem} = useFirebase();
     
     return (
         <section className = 'TaskViewer'>
