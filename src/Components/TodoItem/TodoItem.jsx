@@ -7,9 +7,8 @@ import './TodoItem.sass';
 import Input from '../UIComponents/Input';
 
 //icons:
-import ToDo from '../../Icons/ToDo.svg';
+// import ToDo from '../../Icons/ToDo.svg';
 import RemoveIcon from '../../Icons/RemoveIcon.svg';
-import DragIcon from '../../Icons/DragIcon.svg';
 
 const TodoItem = ({item, RemoveItem, UpdateItem}) => {
     let {task} = item;
@@ -24,22 +23,11 @@ const TodoItem = ({item, RemoveItem, UpdateItem}) => {
 
     return (
         <section draggable = 'true' className = 'TodoItemLabel'>
-            <img 
+            {/* <img 
                 src = {ToDo} 
                 className = 'ToDoCheckedIcon' 
                 alt = ''
-            />
-
-            <section 
-                className = 'dNdIconBody'
-            >
-                <img
-                    src = {DragIcon} 
-                    className="dNdIcon"
-                    alt='' 
-                />
-
-            </section>
+            /> */}
 
             <Input 
                 className = 'TodoItem' 
