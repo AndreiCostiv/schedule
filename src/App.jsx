@@ -11,7 +11,9 @@ import './App.sass';
 import PrivateRoute from './Routes/PrivateRoute/PrivateRoute';
 import Home from './Routes/Home/Home';
 import SingUp from './Routes/Auth/SignUp';
-import LogIn from './Routes/Auth/LogIn';
+// import LogIn from './Routes/Auth/LogIn';
+import LogIn from './Routes/NewAuth/LogIn';
+
 import About from './Routes/About/About';
 import Settings from './Routes/Settings/Settings';
 
