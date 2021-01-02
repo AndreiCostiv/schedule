@@ -1,21 +1,16 @@
 import React, {useCallback, useContext, useState, useEffect} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import firebase from '../../Firebase';
 import validator from 'validator';
 
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
 
-// Components:
-import AuthLinks from '../../Components/AuthLinks/AuthLinks';
-import Input from '../../Components/UIComponents/Input';
-import AuthErrors from '../../Components/AuthErrors/AuthErrors';
-import Button from '../../Components/UIComponents/Button'; 
-
-//Style:
+//style:
 import './Auth.sass';
 
-const SingUp = () => {
+
+const SignUp = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [emailError, setEmailError] = useState('');
@@ -103,47 +98,48 @@ const SingUp = () => {
         )
     }
 
-    return(
-        <form onSubmit = {SubmitHandler} className = 'AuthForm'>
-            <AuthLinks />
+    return (
+        <form className = 'SingUpForm' onSubmit = {SubmitHandler}>
+            <h1 className = 'AuthHeader'>Sign up</h1>
 
-            <Input 
-                type = 'text' 
+            <input 
+                className = 'AuthInput' 
                 name = 'emailInput' 
-                className = 'AuthInput'
-                placeholder = 'email@temp.com'
+                type='text'
+                placeholder = 'Email'
                 value = {email}
-                onChange = {e => {
+                onChange = {e =>
                     setEmail(e.target.value)
-                }}
+                }
             />
-
-            <AuthErrors>
-                {emailError}
-            </AuthErrors>
-
-            <Input 
-                type = 'password' 
-                name = 'passInput' 
-                className = 'AuthInput'
-                placeholder = 'password'
+        
+            <input 
+                className = 'AuthInput' 
+                name = 'passInput'
+                type='password'
+                placeholder = 'Password'
                 value = {pass}
-                onChange = { e => setPass(e.target.value)}
+                onChange = { e =>
+                    setPass(e.target.value)
+                }
             />
 
-            <AuthErrors>
-                {passError}
-            </AuthErrors>
+            <span className = 'hint'>
+                Your email and password must be valid
+            </span>
 
-            <AuthErrors>
-                {signUpError}
-            </AuthErrors>
+            <button
+                className = 'AuthSubmitBtn'
+                type = 'submit'
+            >
+                Create account
+            </button>
 
-            <Button type = 'submit' className = 'AuthBtn'>
-                Log In
-            </Button>
+            <NavLink className = 'AuthLink' to = '/log-in'>
+                If you have account already, log in to start.
+            </NavLink>
         </form>
     )
 };
 
-export default SingUp;
+export default SignUp;

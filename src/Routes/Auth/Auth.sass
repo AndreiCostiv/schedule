@@ -1,41 +1,79 @@
-.AuthForm
-    width: 300px
-    height: 400px
-
-    margin: calc( (100vh - 400px) /2 ) 0 0 0
+@import '../../App.sass' 
+.LogInForm, .SingUpForm
+    margin: 75px 0 0 120px
+    align-self: start
 
     display: flex
     flex-direction: column
-    justify-content: flex-start
-    align-items: center
-    border: 2px solid #BBBBBB
-    border-radius: 4px
+    align-items: flex-start
+
+.AuthHeader
+    height: 66px
+    margin: 0  
+    font-family: Nunito-Bold
+    font-size: 48px 
 
 .AuthInput
-    width: 242px
-    height: 36px
+    width: 360px
+    height: 48px
+    margin: 0 0 11px 0
 
-    padding: 0 0 0 4px
-    margin: 0 0 0 0
+    display: flex
+    align-items: center
 
-    border: 2px solid #000
-    border-radius: 4px
+    border: 1px solid $gray-light
+    border-radius: 15px
 
-    font-size: 20px
-
-.AuthBtn
-    width: 70px
-    height: 30px
+    font-family: Nunito-Regular
+    font-size: 21px
+    color: #000
     
-    margin: auto 25px 20px auto
+    &::placeholder
+        font-family: Nunito-Regular
+        font-size: 21px
+        color: $gray-light
 
-    border: 2px solid #BBBBBB
-    background: transparent
-    border-radius: 4px
+    //overwrites style for the first child:
+    &:first-of-type
+        margin: 30px 0 43px 0
 
+    &:focus
+        outline: none
+
+.hint
+    margin: 0 0 69px 0
+    
+    font-family: Nunito-Light
     font-size: 15px
+    color: $gray-light
+    cursor: default
 
-    cursor: pointer
-        
+.AuthSubmitBtn
+    width: 360px
+    height: 48px
+    margin: 0 0 21px 0
+    
+    border-radius: 15px
+    border: 1px transparent
+
+    background-color: $blue-light
+
+    font-family: Roboto-Medium
+    font-size: 20px
+    color: #fff
+    
     &:hover
-        border: 2px solid #000
+        cursor: pointer
+    
+    &:focus
+        outline: none
+
+.AuthLink
+    font-family: Nunito-Light
+    font-size: 18px
+    margin: 0
+    color: $blue-light
+    
+    &:hover
+        color: $blue-light
+        text-decoration: underline

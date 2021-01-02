@@ -1,21 +1,26 @@
-import React, {useCallback, useContext, useState, useEffect} from 'react';
-import { Redirect, NavLink } from 'react-router-dom';
+import React, {useState, useCallback, useContext, useEffect} from 'react';
+import { Redirect } from 'react-router-dom';
 import firebase from '../../Firebase';
 import validator from 'validator';
 
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
 
-//style:
+//Components:
+import AuthLinks from '../../Components/AuthLinks/AuthLinks';
+import Input from '../../Components/UIComponents/Input';
+import AuthErrors from '../../Components/AuthErrors/AuthErrors';
+import Button from '../../Components/UIComponents/Button'; 
+
+// Styles:
 import './Auth.sass';
 
-
-const SignUp = () => {
+const LogIn = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
     const [emailError, setEmailError] = useState('');
     const [passError, setPassError] = useState('');
-    const [signUpError, setSignUpError] = useState('');
+    const [signInError, setSignInError] = useState('');
 
     const IfEmailTyped = (arg) => {
         if(arg === undefined || arg.length === 0){
@@ -57,9 +62,6 @@ const SignUp = () => {
             e.preventDefault();
             const {emailInput, passInput} = e.target.elements;
             
-            EmailValidator(emailInput.value);
-            PassValidator(passInput.value);
-
             if(
                 IfEmailTyped(emailInput.value) === false 
                 || IfPassTyped(passInput.value) === false
@@ -67,19 +69,18 @@ const SignUp = () => {
                 || PassValidator(passInput.value) === false
             ) 
                 return false;
-            
+
             try{
                 await firebase
                     .auth()
-                    .createUserWithEmailAndPassword(emailInput.value, passInput.value);
+                    .signInWithEmailAndPassword(emailInput.value, passInput.value);
             }
             catch (error){
-                setSignUpError(error.message)
-            }
-        },
-        []
-    );
-    
+                setSignInError(error.message);
+            };
+        }, []
+    ); 
+
     useEffect(() => {
         EmailValidator(email);
         PassValidator(pass);
@@ -95,51 +96,50 @@ const SignUp = () => {
     if(currentUser) {
         return(
             <Redirect to = '/'/>
-        )
-    }
+        );
+    };
 
-    return (
-        <form className = 'SingUpForm' onSubmit = {SubmitHandler}>
-            <h1 className = 'AuthHeader'>Sign up</h1>
+    return(
+        <form onSubmit = {SubmitHandler} className = 'AuthForm'>
+            <AuthLinks />
 
-            <input 
-                className = 'AuthInput' 
+            <Input 
+                type = 'text' 
                 name = 'emailInput' 
-                type='text'
-                placeholder = 'Email'
+                className = 'AuthInput'
+                placeholder = 'email@temp.com'
                 value = {email}
-                onChange = {e =>
+                onChange = {e => {
                     setEmail(e.target.value)
-                }
+                }}
             />
-        
-            <input 
-                className = 'AuthInput' 
-                name = 'passInput'
-                type='password'
-                placeholder = 'Password'
+
+            <AuthErrors>
+                {emailError}
+            </AuthErrors>
+            
+            <Input 
+                type = 'password' 
+                name = 'passInput' 
+                className = 'AuthInput'
+                placeholder = 'password'
                 value = {pass}
-                onChange = { e =>
-                    setPass(e.target.value)
-                }
+                onChange = { e => setPass(e.target.value)}
             />
 
-            <span className = 'hint'>
-                Your email and password must be valid
-            </span>
+            <AuthErrors>
+                {passError}
+            </AuthErrors>
 
-            <button
-                className = 'AuthSubmitBtn'
-                type = 'submit'
-            >
-                Create account
-            </button>
+            <AuthErrors>
+                {signInError}
+            </AuthErrors>
 
-            <NavLink className = 'AuthLink' to = '/log-in'>
-                If you have account already, log in to start.
-            </NavLink>
+            <Button type = 'submit' className = 'AuthBtn'>
+                Log In
+            </Button>
         </form>
-    )
+    );
 };
 
-export default SignUp;
+export default LogIn;

@@ -1,19 +1,13 @@
 import React, {useState, useCallback, useContext, useEffect} from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import firebase from '../../Firebase';
 import validator from 'validator';
 
+//style:
+import './Auth.sass';
+
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
-
-//Components:
-import AuthLinks from '../../Components/AuthLinks/AuthLinks';
-import Input from '../../Components/UIComponents/Input';
-import AuthErrors from '../../Components/AuthErrors/AuthErrors';
-import Button from '../../Components/UIComponents/Button'; 
-
-// Styles:
-import './Auth.sass';
 
 const LogIn = () => {
     const [email, setEmail] = useState('');
@@ -99,47 +93,46 @@ const LogIn = () => {
         );
     };
 
-    return(
-        <form onSubmit = {SubmitHandler} className = 'AuthForm'>
-            <AuthLinks />
+    return (
+        <form onSubmit = {SubmitHandler} className = 'LogInForm'>
+            <h1 className = 'AuthHeader'>Log in to continue</h1>
 
-            <Input 
-                type = 'text' 
+            <input 
+                className = 'AuthInput' 
                 name = 'emailInput' 
-                className = 'AuthInput'
-                placeholder = 'email@temp.com'
+                type='text'
+                placeholder = 'Email'
                 value = {email}
                 onChange = {e => {
                     setEmail(e.target.value)
                 }}
             />
-
-            <AuthErrors>
-                {emailError}
-            </AuthErrors>
-            
-            <Input 
-                type = 'password' 
-                name = 'passInput' 
-                className = 'AuthInput'
-                placeholder = 'password'
+        
+            <input 
+                className = 'AuthInput' 
+                name = 'passInput'
+                type='password'
+                placeholder = 'Password'
                 value = {pass}
                 onChange = { e => setPass(e.target.value)}
             />
 
-            <AuthErrors>
-                {passError}
-            </AuthErrors>
+            <span className = 'hint'>
+                Your email and password must be valid
+            </span>
 
-            <AuthErrors>
-                {signInError}
-            </AuthErrors>
+            <button
+                className = 'AuthSubmitBtn'
+                type = 'submit'
+            >
+                Log in
+            </button>
 
-            <Button type = 'submit' className = 'AuthBtn'>
-                Log In
-            </Button>
+            <NavLink className = 'AuthLink' to = '/sign-up'>
+                Don't have account? You can create one now.
+            </NavLink>
         </form>
-    );
+    )
 };
 
 export default LogIn;
