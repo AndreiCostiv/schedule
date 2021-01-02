@@ -10,8 +10,7 @@ import './App.sass';
 //Routes:
 import PrivateRoute from './Routes/PrivateRoute/PrivateRoute';
 import Home from './Routes/Home/Home';
-import SingUp from './Routes/Auth/SignUp';
-// import LogIn from './Routes/Auth/LogIn';
+import SingUp from './Routes/NewAuth/SignUp';
 import LogIn from './Routes/NewAuth/LogIn';
 
 import About from './Routes/About/About';
