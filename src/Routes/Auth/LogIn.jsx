@@ -121,6 +121,12 @@ const LogIn = () => {
                 Your email and password must be valid
             </span>
 
+            <span className = 'hint'>
+                {emailError && emailError}
+                {passError && passError}
+                {signInError && signInError}
+            </span>
+
             <button
                 className = 'AuthSubmitBtn'
                 type = 'submit'

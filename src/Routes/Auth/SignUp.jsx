@@ -128,6 +128,12 @@ const SignUp = () => {
                 Your email and password must be valid
             </span>
 
+            <span className = 'hint'>
+                {emailError && emailError}
+                {passError && passError}
+                {signUpError && signUpError}
+            </span>
+
             <button
                 className = 'AuthSubmitBtn'
                 type = 'submit'
