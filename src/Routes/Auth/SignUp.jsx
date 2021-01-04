@@ -48,6 +48,13 @@ const SignUp = () => {
         if(arg.length < 8 || arg.length > 20){
             setPassError('Password should contain 8-20 symbols');
         }
+        else if (!/\d/.test(arg)){
+            setPassError('Your must add digits to your password');
+            return false;
+        }
+        else if(arg.length >= 8 & arg.length <= 20){
+            setPassError('');
+        }
         else
             return(true);
     };
@@ -81,9 +88,6 @@ const SignUp = () => {
     );
     
     useEffect(() => {
-        EmailValidator(email);
-        PassValidator(pass);
-
         if(email.length === 0 || pass.length === 0){
             setEmailError('');
             setPassError('');
@@ -102,36 +106,36 @@ const SignUp = () => {
         <form className = 'SingUpForm' onSubmit = {SubmitHandler}>
             <h1 className = 'AuthHeader'>Sign up</h1>
 
-            <input 
-                className = 'AuthInput' 
-                name = 'emailInput' 
+            <input
+                autoComplete = 'false'
+                className = 'AuthInput'
+                name = 'emailInput'
                 type='text'
                 placeholder = 'Email'
                 value = {email}
-                onChange = {e =>
-                    setEmail(e.target.value)
-                }
+                onChange = {e => setEmail(e.target.value)}
+                onBlur = {e => EmailValidator(e.target.value)}
             />
         
-            <input 
-                className = 'AuthInput' 
+            <input
+                autoComplete = 'false'
+                className = 'AuthInput'
                 name = 'passInput'
                 type='password'
                 placeholder = 'Password'
                 value = {pass}
-                onChange = { e =>
-                    setPass(e.target.value)
-                }
+                onChange = { e => setPass(e.target.value)}
+                onBlur = {e => PassValidator(e.target.value)}
             />
 
-            <span className = 'hint'>
+            <span className = 'AuthHint'>
                 Your email and password must be valid
             </span>
 
-            <span className = 'hint'>
-                {emailError && emailError}
-                {passError && passError}
-                {signUpError && signUpError}
+            <span className = 'AuthError'>
+                {emailError.length > 0 && emailError}
+                {passError.length > 0 && passError}
+                {signUpError.length > 0 && signUpError}
             </span>
 
             <button

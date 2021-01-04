@@ -12,12 +12,13 @@
     margin: 0  
     font-family: Nunito-Bold
     font-size: 48px 
+    cursor: default
 
 .AuthInput
-    width: 360px
+    width: 333px
     height: 48px
     margin: 0 0 11px 0
-
+    padding: 0 0 0 25px
     display: flex
     align-items: center
 
@@ -40,13 +41,21 @@
     &:focus
         outline: none
 
-.hint
-    margin: 0 0 69px 0
+.AuthHint, .AuthError
+    margin: 0 0 25px 0
     
     font-family: Nunito-Light
     font-size: 15px
     color: $gray-light
     cursor: default
+
+//overwrite style for error message:
+.AuthError
+    margin: 0 0 30px 0
+
+    font-family: Roboto-Bold
+    font-size: 15px
+    color: #FF0000
 
 .AuthSubmitBtn
     width: 360px
