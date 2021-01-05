@@ -9,6 +9,11 @@ import './Auth.sass';
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
 
+//components:
+import Header from '../../Components/UIComponents/Header';
+import Input from '../../Components/UIComponents/Input';
+import Button from '../../Components/UIComponents/Button';
+
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
@@ -98,9 +103,9 @@ const LogIn = () => {
 
     return (
         <form onSubmit = {SubmitHandler} className = 'LogInForm'>
-            <h1 className = 'AuthHeader'>Log in to continue</h1>
+            <Header size = {1} className = 'AuthHeader'>Log in to continue</Header>
 
-            <input
+            <Input 
                 autoComplete = 'false'
                 className = 'AuthInput' 
                 name = 'emailInput' 
@@ -111,7 +116,7 @@ const LogIn = () => {
                 onBlur = {e => EmailValidator(e.target.value)}
             />
         
-            <input
+            <Input
                 autoComplete = 'false'
                 className = 'AuthInput'
                 name = 'passInput'
@@ -132,12 +137,12 @@ const LogIn = () => {
                 {signInError.length > 0 && signInError}
             </span>
 
-            <button
+            <Button
                 className = 'AuthSubmitBtn'
                 type = 'submit'
             >
                 Log in
-            </button>
+            </Button>
 
             <NavLink className = 'AuthLink' to = '/sign-up'>
                 Don't have account? You can create one now.

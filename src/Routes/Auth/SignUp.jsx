@@ -3,11 +3,16 @@ import { Redirect, NavLink } from 'react-router-dom';
 import firebase from '../../Firebase';
 import validator from 'validator';
 
+//style:
+import './Auth.sass';
+
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
 
-//style:
-import './Auth.sass';
+//components:
+import Header from '../../Components/UIComponents/Header';
+import Input from '../../Components/UIComponents/Input';
+import Button from '../../Components/UIComponents/Button';
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -103,9 +108,9 @@ const SignUp = () => {
 
     return (
         <form className = 'SingUpForm' onSubmit = {SubmitHandler}>
-            <h1 className = 'AuthHeader'>Sign up</h1>
+            <Header size = {1} className = 'AuthHeader'>Sign up</Header>
 
-            <input
+            <Input
                 autoComplete = 'false'
                 className = 'AuthInput'
                 name = 'emailInput'
@@ -116,7 +121,7 @@ const SignUp = () => {
                 onBlur = {e => EmailValidator(e.target.value)}
             />
         
-            <input
+            <Input
                 autoComplete = 'false'
                 className = 'AuthInput'
                 name = 'passInput'
@@ -137,12 +142,12 @@ const SignUp = () => {
                 {signUpError.length > 0 && signUpError}
             </span>
 
-            <button
+            <Button
                 className = 'AuthSubmitBtn'
                 type = 'submit'
             >
                 Create account
-            </button>
+            </Button>
 
             <NavLink className = 'AuthLink' to = '/log-in'>
                 If you have account already, log in to start.
