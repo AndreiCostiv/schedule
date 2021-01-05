@@ -1,0 +1,32 @@
+@import '../../App.sass' 
+
+@media screen and ( max-width: 1000px )
+    .LogInForm, .SingUpForm
+        width: 335px
+        margin: 74px auto 0 auto
+
+    .AuthHeader
+        font-size: 31px
+        height: 40px
+    
+    .AuthInput
+        width: 310px
+        margin: 0 0 10px 0
+        align-self: center
+
+        //overwrites style for the first child:
+        &:first-of-type
+            margin: 30px 0 43px 0
+
+    .AuthError
+        margin: 0 0 50px 0
+
+    .AuthSubmitBtn
+        width: 335px
+
+        align-self: center
+    
+    .AuthLink
+        align-self: center
+
+        font-size: 16px

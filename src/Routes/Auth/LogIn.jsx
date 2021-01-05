@@ -5,6 +5,7 @@ import validator from 'validator';
 
 //style:
 import './Auth.sass';
+import './AuthMobile.sass';
 
 //Context:
 import {AuthContext} from '../../Context/AuthContext';

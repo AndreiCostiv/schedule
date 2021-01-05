@@ -5,6 +5,7 @@ import validator from 'validator';
 
 //style:
 import './Auth.sass';
+import './AuthMobile.sass';
 
 //Context:
 import {AuthContext} from '../../Context/AuthContext';
@@ -67,9 +68,6 @@ const SignUp = () => {
         async e => {
             e.preventDefault();
             const {emailInput, passInput} = e.target.elements;
-            
-            EmailValidator(emailInput.value);
-            PassValidator(passInput.value);
 
             if(
                 IfEmailTyped(emailInput.value) === false 
