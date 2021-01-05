@@ -9,7 +9,6 @@ import {AuthContext} from '../../Context/AuthContext';
 //style:
 import './Auth.sass';
 
-
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
