@@ -9,11 +9,11 @@ const Menu = () => {
     }, [])
     return (
         <menu className = 'Menu'>
-            {/* <h1 className = 'Logo'>Tasksful</h1>
+            <h1 className = 'Logo'>Tasksful</h1>
 
-            <NavLink to = '/notes'>Notes</NavLink>
-            <NavLink to = '/running_list'>Runnig list</NavLink>
-            <NavLink to = '/settings'>Settings</NavLink> */}
+            <NavLink className = 'MenuLink' to = '/notes'>Notes</NavLink>
+            <NavLink className = 'MenuLink' to = '/running_list'>Runnig list</NavLink>
+            <NavLink className = 'MenuLink' to = '/settings'>Settings</NavLink>
         </menu>
     );
 };
