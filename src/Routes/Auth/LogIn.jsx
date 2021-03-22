@@ -3,17 +3,8 @@ import { Redirect, NavLink } from 'react-router-dom';
 import firebase from '../../Firebase';
 import validator from 'validator';
 
-//style:
-import './Auth.sass';
-import './AuthMobile.sass';
-
 //Context:
-import {AuthContext} from '../../Context/AuthContext';
-
-//components:
-import Header from '../../Components/UIComponents/Header';
-import Input from '../../Components/UIComponents/Input';
-import Button from '../../Components/UIComponents/Button';
+import {Context} from '../';
 
 const LogIn = () => {
     const [email, setEmail] = useState('');
@@ -94,7 +85,7 @@ const LogIn = () => {
         }
     }, [email, pass]);
 
-    const {currentUser} = useContext(AuthContext);
+    const {currentUser} = useContext(Context);
 
     if(currentUser) {
         return(
